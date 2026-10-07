@@ -1,0 +1,93 @@
+2026.09.13
+
+1.字典的遍历方法（字典中元素的提取）：
+  例子1 --> "for dish, price in name.items():"
+
+2.摁下空格报错的问题（已解决）
+
+重写了个get_int函数，用来控制用户在需要输入int类型数据时候的报错
+
+3.添加菜品时，对重复菜名的提醒
+
+4.菜品菜单显示顺序问题（已解决）
+
+5.有关文件的读写：
+  r --> 读
+  w --> 写
+  a --> 追加
+  r+ --> 读写（无对应文件就报错）
+  w+ --> 读写（无文件就创建，有文件就清空再写）
+  a+ --> 追加读写
+
+  rt是r的显性声明，本质上是一样的 
+  r + t : read file in txt
+  其它也是如此
+
+6.菜品文件的读写规范用json格式
+  with open('菜品数据.json', 'wt', encoding='utf-8') as f:
+        j.dump(menu, f, ensure_ascii=False, indent=2)
+
+7.实现了添加菜品的操作（增），可尝试编写 删、改、查
+
+8.用 with 语句 打开文件不需要手动 f.close
+
+9.
+  C:\Users\weisheng\Desktop\线程作业\菜品数据.json
+  C:\Users\weisheng\Desktop\线程作业\菜品数据.json
+
+10.elif c1 == 3:
+            with open('菜品数据.json', 'wt', encoding='utf-8') as f:
+                j.dump(menu, f, ensure_ascii=False, indent=2)
+            print("See u next time!")
+            t.sleep(1.5)
+            exit()
+  文件退出的时候重新写一遍文件（With语句会自动关闭file）
+  保证数据完整写入
+
+11.
+读文件用 r，写文件用 w
+a+ 只在追加日志时用，读 JSON 千万别用
+改 JSON 的标准套路：读出来 → 改内存 → 整个写回去
+
+12.
+if not clear_data 等价于 if len(clear_data) == 0 等价于 if clear_data == []
+但是 if clear_data == None 永远不成立！
+None是什么都没有 空列表虽然是空的，但是也不与None对等
+
+13.现在的代码容易栈溢出 检查下main的逻辑
+   admin_mode里面的逻辑也要改
+   自己的函数做完自己的事就return回来 不要继续函数里面调用别的函数 
+   重复操作几百次就栈溢出了
+   改完之后 每个函数结尾 没有特殊的数值要传递的话 基本上就是return
+   
+   整体main的逻辑应该是这个样子的：
+   main → admin_mode → dishes_modifying → 返回 admin_mode → 返回 main
+   （这里拿dishes_modifying举例子，其他函数也是一样的）
+   这样的话 重复操作10000遍也不会栈溢出
+
+14.写完整个程序的时候，将所有调试代码注释掉，保证程序运行不要有多的东西出现！
+
+15.
+菜品仍未确定，不需要过早进行代码优化
+确定好数据结构即可
+给未来程序的
+
+现在：菜单打印 + 预留字段，别写查询
+
+菜品定了：填 category，写"先选分类再列菜"的浏览
+
+真到 100+ 且分类也不够用：再加"输入名称搜索"
+
+
+16.admin_mode已经写完了，现在主要是用户订餐的代码
+   （1）用户选完菜品之后，需要计算每一单的总金额；
+   （2）如果不进入Dishes logs Check，订单就无法生成；
+    (3)其他功能检查下有无缺失返回功能的尽快补上；
+
+17.客户点餐功能基本实现
+
+   
+
+
+
+
